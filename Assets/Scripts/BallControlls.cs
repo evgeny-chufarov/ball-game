@@ -28,7 +28,6 @@ public class BallControlls : MonoBehaviour
         // Acceleration
         rb.AddForce(movement * speed);
 
-
         // Jump
         if (Input.GetKeyDown("space"))
         {
