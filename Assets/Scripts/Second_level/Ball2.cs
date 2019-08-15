@@ -4,18 +4,21 @@ using UnityEngine;
 
     public class Ball2 : MonoBehaviour
     {
-        public float speed;
         private Rigidbody2D rb;
-
+           
+        public float baseSpeed = 1.5f;
+        public static float speed;
+        public bool am_i_faster = false;
+    
         // Use this for initialization
-        void Start()
+    void Start()
         {
             rb = GetComponent<Rigidbody2D>();
+            speed = baseSpeed;
         }
 
-
-        // Update is called once per frame
-        void Update()
+    // Update is called once per frame
+    void Update()
         {
             // Get player's key
             float moveHorizontal = Input.GetAxis("Horizontal");
@@ -33,5 +36,14 @@ using UnityEngine;
                 rb.AddForce(jump, ForceMode2D.Impulse);
             }
 
+            if (speed == 4)
+            {
+                am_i_faster = true;
+            }
+            else
+            {
+            am_i_faster = false;
+            }
+
         }
-    }
+}
