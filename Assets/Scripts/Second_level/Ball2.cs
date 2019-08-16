@@ -10,7 +10,11 @@ public class Ball2 : MonoBehaviour
     public float baseSpeed = 1.5f;
     public static float speed;
     public bool am_i_faster = false;
+    public bool am_i_slower = false;
     
+    // Variables for jumping
+    public static bool on_trampoline = false;
+
     void Start()
     {
             rb = GetComponent<Rigidbody2D>();
@@ -30,7 +34,12 @@ public class Ball2 : MonoBehaviour
             rb.AddForce(movement * speed);
 
             // Jump
-            if (Input.GetKeyDown("space"))
+            if (Input.GetKeyDown("space") && on_trampoline)
+            {
+                jump = new Vector2(0, 2);
+                rb.AddForce(jump, ForceMode2D.Impulse);
+            }
+            else if (Input.GetKeyDown("space") && !on_trampoline)
             {
                 rb.AddForce(jump, ForceMode2D.Impulse);
             }
@@ -40,10 +49,14 @@ public class Ball2 : MonoBehaviour
             {
                 am_i_faster = true;
             }
+            else if (speed == 0.3f)
+            {
+                am_i_slower = true;
+            }
             else
             {
                 am_i_faster = false;
+                am_i_slower = false;
             }
-
     }
 }
