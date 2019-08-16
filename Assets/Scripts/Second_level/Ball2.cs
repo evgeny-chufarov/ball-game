@@ -36,8 +36,8 @@ public class Ball2 : MonoBehaviour
             rb.AddForce(movement * speed);
 
             // Restrict double jumping
-            isGrounded = Physics2D.OverlapArea(new Vector2(transform.position.x - 0.35f, transform.position.y - 0.35f),
-                new Vector2(transform.position.x + 0.35f, transform.position.y - 0.36f), groundLayers);
+            isGrounded = Physics2D.OverlapArea(new Vector2(transform.position.x - 0.05f, transform.position.y - 0.31f),
+                new Vector2(transform.position.x + 0.05f, transform.position.y - 0.32f), groundLayers);
 
             // Jump
             if (Input.GetKeyDown("space") && on_trampoline && isGrounded)
@@ -71,8 +71,8 @@ public class Ball2 : MonoBehaviour
     //void OnDrawGizmos ()
     //{
     //    Gizmos.color = new Color(0, 1, 0, 0.5f);
-    //    Gizmos.DrawCube(new Vector2(transform.position.x, transform.position.y - 0.355f),
-    //       new Vector2(1, 0.01f));
+    //    Gizmos.DrawCube(new Vector2(transform.position.x, transform.position.y - 0.325f),
+    //       new Vector2(0.1f, 0.01f));
     //}
 
 }
