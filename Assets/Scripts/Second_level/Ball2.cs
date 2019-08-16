@@ -11,8 +11,10 @@ public class Ball2 : MonoBehaviour
     public static float speed;
     public bool am_i_faster = false;
     public bool am_i_slower = false;
-    
+
     // Variables for jumping
+    public bool isGrounded;
+    public LayerMask groundLayers;
     public static bool on_trampoline = false;
 
     void Start()
@@ -33,13 +35,17 @@ public class Ball2 : MonoBehaviour
             // Acceleration
             rb.AddForce(movement * speed);
 
+            // Restrict double jumping
+            isGrounded = Physics2D.OverlapArea(new Vector2(transform.position.x - 0.35f, transform.position.y - 0.35f),
+                new Vector2(transform.position.x + 0.35f, transform.position.y - 0.36f), groundLayers);
+
             // Jump
-            if (Input.GetKeyDown("space") && on_trampoline)
+            if (Input.GetKeyDown("space") && on_trampoline && isGrounded)
             {
                 jump = new Vector2(0, 2);
                 rb.AddForce(jump, ForceMode2D.Impulse);
             }
-            else if (Input.GetKeyDown("space") && !on_trampoline)
+            else if (Input.GetKeyDown("space") && !on_trampoline && isGrounded)
             {
                 rb.AddForce(jump, ForceMode2D.Impulse);
             }
@@ -59,4 +65,14 @@ public class Ball2 : MonoBehaviour
                 am_i_slower = false;
             }
     }
+
+    // Drawing an overlap area for an Object //
+    ///////////////////////////////////////////
+    //void OnDrawGizmos ()
+    //{
+    //    Gizmos.color = new Color(0, 1, 0, 0.5f);
+    //    Gizmos.DrawCube(new Vector2(transform.position.x, transform.position.y - 0.355f),
+    //       new Vector2(1, 0.01f));
+    //}
+
 }
