@@ -5,7 +5,8 @@ using UnityEngine;
 public class Ball3 : MonoBehaviour
 {
     private Rigidbody2D rb;
-        
+    private SpriteRenderer ren;
+
     // Variables for speed control
     public float baseSpeed = 1.5f;
     public static float speed;
@@ -13,10 +14,19 @@ public class Ball3 : MonoBehaviour
     // Variables for jumping
     public bool isGrounded;
     public LayerMask groundLayers;
-    
+
+    // Color
+    public static bool wood = false;
+    public static bool metal = false;
+
+    // Fire and Water
+    public static bool in_fire = false;
+    public static bool water = false;
+
     void Start()
     {
             rb = GetComponent<Rigidbody2D>();
+            ren = GetComponent<SpriteRenderer>();
             speed = baseSpeed;
     }
 
@@ -27,7 +37,7 @@ public class Ball3 : MonoBehaviour
 
             // Define base movement and jump
             Vector2 movement = new Vector2(moveHorizontal, 0);
-            Vector2 jump = new Vector2(0, 1);
+            Vector2 jump = new Vector2(0, 2);
 
             // Acceleration
             rb.AddForce(movement * speed);
@@ -41,8 +51,29 @@ public class Ball3 : MonoBehaviour
             {
                 rb.AddForce(jump, ForceMode2D.Impulse);
             }
+
+            // Change material
+            if (wood == true)
+            {
+                ren.color = new Color32(193, 131, 0, 255);
+            }
+            else if (metal == true)
+            {
+                ren.color = Color.black;
+            }
+
+            // Change material
+            if (in_fire == true && metal == false)
+            {
+                ren.color = Color.red;
+                //transform.position = new Vector2(transform.position.x + 1.0f, transform.position.y);
+                //transform.position.x = transform.position.x + 6;
+                
+            }
             
     }
+
+    
 
     // Drawing an overlap area for an Object //
     ///////////////////////////////////////////
