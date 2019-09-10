@@ -23,6 +23,7 @@ public class Ball : MonoBehaviour
     public static bool inFire = false;
     public static bool mad = false;
     public static bool inWater = false;
+    public static bool onTrampoline = false;
 
     void Start()
     {
@@ -39,9 +40,10 @@ public class Ball : MonoBehaviour
             // Define base movement and jump
             Vector2 movement = new Vector2(moveHorizontal, 0);
             Vector2 jump = new Vector2(0, 2);
+            Vector2 high_jump = new Vector2(0, 4);
 
-            // Acceleration
-            rb.AddForce(movement * speed);
+        // Acceleration
+        rb.AddForce(movement * speed);
 
             // Restrict double jumping
             isGrounded = Physics2D.OverlapArea(new Vector2(transform.position.x - 0.05f, transform.position.y - 0.12f),
@@ -53,8 +55,13 @@ public class Ball : MonoBehaviour
                 rb.AddForce(jump, ForceMode2D.Impulse);
             }
 
-            // Change material
-            if (isWood == true)
+            if (Input.GetKeyDown("space") && isGrounded && onTrampoline)
+            {
+                rb.AddForce(high_jump, ForceMode2D.Impulse);
+            }
+
+        // Change material
+        if (isWood == true)
             {
                 ren.color = Color.white;
             }
