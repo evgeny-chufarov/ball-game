@@ -8,6 +8,7 @@ public class W_button : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
        Ball.isWood = true;
+       Ball.isMetal = false;
     }
 
 }

@@ -61,7 +61,7 @@ public class Ball : MonoBehaviour
             }
 
         // Change material
-        if (isWood == true)
+            if (isWood == true)
             {
                 ren.color = Color.white;
             }
