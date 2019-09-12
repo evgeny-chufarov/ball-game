@@ -19,8 +19,8 @@ public class Ball : MonoBehaviour
     public LayerMask groundLayers;
 
     // Color
-    public static bool isWood = true;
-    public static bool isMetal = false;
+    public static bool isWood = false;
+    public static bool isMetal = true;
 
     // Fire and Water
     public static bool inFire = false;
@@ -28,8 +28,10 @@ public class Ball : MonoBehaviour
     public static bool inWater = false;
     public static bool onTrampoline = false;
 
-    // Health counter
+    // Health and key counter
     public static int health = 3;
+    public bool hasKey = false;
+
 
     void Start()
     {
@@ -99,7 +101,12 @@ public class Ball : MonoBehaviour
         {
             rb.transform.position = portalPoint.position;
         }
-        
+        else if (other.gameObject.tag == "Key")
+        {
+            hasKey = true;
+            other.gameObject.SetActive(false);
+        }
+
     }
 
 
