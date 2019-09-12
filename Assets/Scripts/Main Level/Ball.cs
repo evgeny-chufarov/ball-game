@@ -28,6 +28,9 @@ public class Ball : MonoBehaviour
     public static bool inWater = false;
     public static bool onTrampoline = false;
 
+    // Health counter
+    public static int health = 3;
+
     void Start()
     {
             rb = GetComponent<Rigidbody2D>();
@@ -90,6 +93,7 @@ public class Ball : MonoBehaviour
         if (other.gameObject.tag == "Fire" && isWood)
         {
             rb.transform.position = spawnPoint.position;
+            health--;
         }
         else if (other.gameObject.tag == "Portal" && isWood)
         {
