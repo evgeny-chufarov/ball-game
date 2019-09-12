@@ -30,7 +30,7 @@ public class Ball : MonoBehaviour
 
     // Health and key counter
     public static int health = 3;
-    public bool hasKey = false;
+    public static bool hasKey = false;
 
 
     void Start()
@@ -77,7 +77,8 @@ public class Ball : MonoBehaviour
             {
                 ren.color = Color.black;
             }
-            else if (mad == true)
+
+            if (mad == true)
             {
                 ren.color = Color.gray;
                 rb.mass = 1.1f;
