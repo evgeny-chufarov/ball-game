@@ -29,7 +29,7 @@ public class Ball : MonoBehaviour
     public static bool onTrampoline = false;
 
     // Health and key counter
-    public static int health = 3;
+    public static int health = 5;
     public static bool hasKey = false;
 
 
@@ -81,7 +81,7 @@ public class Ball : MonoBehaviour
             if (mad == true)
             {
                 ren.color = Color.gray;
-                rb.mass = 1.1f;
+                rb.mass = 0.9f;
             }
             else if (inWater == true)
             {
@@ -105,7 +105,16 @@ public class Ball : MonoBehaviour
         else if (other.gameObject.tag == "Key")
         {
             hasKey = true;
-            other.gameObject.SetActive(false);
+        }
+        else if (other.gameObject.tag == "Electro" && isMetal)
+        {
+            rb.transform.position = spawnPoint.position;
+            health--;
+        }
+        else if (other.gameObject.tag == "Obstacle")
+        {
+            rb.transform.position = spawnPoint.position;
+            health--;
         }
 
     }
