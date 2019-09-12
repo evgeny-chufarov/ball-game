@@ -11,8 +11,8 @@ public class Ball : MonoBehaviour
     private SpriteRenderer ren;
 
     // Variables for speed control
-    public float baseSpeed = 1.5f;
-    public static float speed;
+    public static float baseSpeed = 1.5f;
+    public float speed;
     
     // Variables for jumping
     public bool isGrounded;
@@ -37,7 +37,6 @@ public class Ball : MonoBehaviour
     {
             rb = GetComponent<Rigidbody2D>();
             ren = GetComponent<SpriteRenderer>();
-            speed = baseSpeed;
     }
 
     void Update()
@@ -51,6 +50,7 @@ public class Ball : MonoBehaviour
             Vector2 high_jump = new Vector2(0, 4);
 
             // Acceleration
+            speed = baseSpeed;
             rb.AddForce(movement * speed);
 
             // Restrict double jumping
