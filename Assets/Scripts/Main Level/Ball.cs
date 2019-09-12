@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    [SerializeField] Transform spawnPoint;
+    [SerializeField] Transform portalPoint;
+
     private Rigidbody2D rb;
     private SpriteRenderer ren;
 
@@ -42,8 +45,8 @@ public class Ball : MonoBehaviour
             Vector2 jump = new Vector2(0, 2);
             Vector2 high_jump = new Vector2(0, 4);
 
-        // Acceleration
-        rb.AddForce(movement * speed);
+            // Acceleration
+            rb.AddForce(movement * speed);
 
             // Restrict double jumping
             isGrounded = Physics2D.OverlapArea(new Vector2(transform.position.x - 0.05f, transform.position.y - 0.12f),
@@ -79,18 +82,30 @@ public class Ball : MonoBehaviour
                 ren.color = Color.white;
                 rb.mass = 0.6f;
             }
-                          
+
     }
 
-    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Fire" && isWood)
+        {
+            rb.transform.position = spawnPoint.position;
+        }
+        else if (other.gameObject.tag == "Portal" && isWood)
+        {
+            rb.transform.position = portalPoint.position;
+        }
+        
+    }
+
 
     // Drawing an overlap area for an Object //
     ///////////////////////////////////////////
     //void OnDrawGizmos ()
     //{
-     //   Gizmos.color = new Color(0, 1, 0, 0.5f);
-       // Gizmos.DrawCube(new Vector2(transform.position.x, transform.position.y - 0.13f),
-         //  new Vector2(0.1f, 0.01f));
+    //   Gizmos.color = new Color(0, 1, 0, 0.5f);
+    // Gizmos.DrawCube(new Vector2(transform.position.x, transform.position.y - 0.13f),
+    //  new Vector2(0.1f, 0.01f));
     //}
 
 }

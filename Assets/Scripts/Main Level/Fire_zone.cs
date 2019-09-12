@@ -6,7 +6,7 @@ public class Fire_zone : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(gameObject.name, gameObject);
+        //Debug.Log(Ball.inFire);
         Ball.inFire = true;
     }
 

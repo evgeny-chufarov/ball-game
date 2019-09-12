@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Oil
   - Fire
+  - Portal
   layers:
   - Default
   - TransparentFX
