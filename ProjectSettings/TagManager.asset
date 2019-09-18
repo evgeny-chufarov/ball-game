@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Oil
+  - Fire
+  - Portal
+  - Key
+  - Electro
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -15,8 +20,8 @@ TagManager:
   - 
   - 
   - Background
-  - 
-  - 
+  - Ground
+  - Player
   - 
   - 
   - 
@@ -44,4 +49,13 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 2463068081
+    locked: 0
+  - name: Fire
+    uniqueID: 4015943477
+    locked: 0
+  - name: UI
+    uniqueID: 1978059511
     locked: 0
