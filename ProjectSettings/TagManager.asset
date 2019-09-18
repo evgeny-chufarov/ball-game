@@ -11,6 +11,7 @@ TagManager:
   - Electro
   - Obstacle
   - Water
+  - Water2
   layers:
   - Default
   - TransparentFX

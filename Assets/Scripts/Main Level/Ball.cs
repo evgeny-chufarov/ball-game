@@ -23,8 +23,8 @@ public class Ball : MonoBehaviour
     public LayerMask groundLayers;
 
     // Color
-    public static bool isWood = false;
-    public static bool isMetal = true;
+    public static bool isWood = true;
+    public static bool isMetal = false;
 
     // Fire and Water
     public static bool inFire = false;
@@ -77,11 +77,13 @@ public class Ball : MonoBehaviour
             if (CrossPlatformInputManager.GetButtonDown("Jump") && isGrounded)
             {
                 rb.AddForce(jump, ForceMode2D.Impulse);
+                FindObjectOfType<AudioManager>().Play("Jump");
             }
 
             if (CrossPlatformInputManager.GetButtonDown("Jump") && isGrounded && onTrampoline)
             {
                 rb.AddForce(high_jump, ForceMode2D.Impulse);
+                FindObjectOfType<AudioManager>().Play("Trampoline");
             }
 
         // Change material
@@ -107,6 +109,7 @@ public class Ball : MonoBehaviour
 
     }
 
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Fire" && isWood)
@@ -117,6 +120,7 @@ public class Ball : MonoBehaviour
         else if (other.gameObject.tag == "Portal" && isWood)
         {
             rb.transform.position = portalPoint.position;
+            FindObjectOfType<AudioManager>().Play("Teleport");
         }
         else if (other.gameObject.tag == "Key")
         {
@@ -136,8 +140,9 @@ public class Ball : MonoBehaviour
         {
             water_density = other.GetComponent<BuoyancyEffector2D>();
             water_density.density = 10;
-        }
 
+            FindObjectOfType<AudioManager>().Play("Water");
+        }
     }
 } // class
 

@@ -9,6 +9,7 @@ public class W_button : MonoBehaviour
     {
        Ball.isWood = true;
        Ball.isMetal = false;
+       FindObjectOfType<AudioManager>().Play("Button");
     }
 
 }
