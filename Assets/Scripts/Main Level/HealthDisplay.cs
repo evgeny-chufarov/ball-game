@@ -6,7 +6,6 @@ using UnityEngine;
 public class HealthDisplay : MonoBehaviour
 {
 
-    private int health = 3;
     public Text healthText;
 
     void Update()

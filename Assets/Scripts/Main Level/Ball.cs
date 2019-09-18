@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Ball : MonoBehaviour
 {
     [SerializeField] Transform spawnPoint;
     [SerializeField] Transform portalPoint;
 
+    public Joystick joystick;
+
     private Rigidbody2D rb;
     private SpriteRenderer ren;
+    private BuoyancyEffector2D water_density;
 
     // Variables for speed control
     public static float baseSpeed = 1.5f;
@@ -42,7 +46,8 @@ public class Ball : MonoBehaviour
     void Update()
     {
             // Get player's key
-            float moveHorizontal = Input.GetAxis("Horizontal");
+            //float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveHorizontal = joystick.Horizontal;
 
             // Define base movement and jump
             Vector2 movement = new Vector2(moveHorizontal, 0);
@@ -57,19 +62,30 @@ public class Ball : MonoBehaviour
             isGrounded = Physics2D.OverlapArea(new Vector2(transform.position.x - 0.05f, transform.position.y - 0.12f),
                 new Vector2(transform.position.x + 0.05f, transform.position.y - 0.13f), groundLayers);
 
-            // Jump
-            if (Input.GetKeyDown("space") && isGrounded)
+            // Jump for PC version
+            //if (Input.GetKeyDown("space") && isGrounded)
+            //{
+            //    rb.AddForce(jump, ForceMode2D.Impulse);
+            //}
+
+            //if (Input.GetKeyDown("space") && isGrounded && onTrampoline)
+            //{
+            //    rb.AddForce(high_jump, ForceMode2D.Impulse);
+            //}
+
+            // Jump for Android version
+            if (CrossPlatformInputManager.GetButtonDown("Jump") && isGrounded)
             {
                 rb.AddForce(jump, ForceMode2D.Impulse);
             }
 
-            if (Input.GetKeyDown("space") && isGrounded && onTrampoline)
+            if (CrossPlatformInputManager.GetButtonDown("Jump") && isGrounded && onTrampoline)
             {
                 rb.AddForce(high_jump, ForceMode2D.Impulse);
             }
 
         // Change material
-            if (isWood == true)
+        if (isWood == true)
             {
                 ren.color = Color.white;
             }
@@ -116,17 +132,22 @@ public class Ball : MonoBehaviour
             rb.transform.position = spawnPoint.position;
             health--;
         }
+        else if (other.gameObject.tag == "Water" && isMetal)
+        {
+            water_density = other.GetComponent<BuoyancyEffector2D>();
+            water_density.density = 10;
+        }
 
     }
+} // class
 
 
-    // Drawing an overlap area for an Object //
-    ///////////////////////////////////////////
-    //void OnDrawGizmos ()
-    //{
-    //   Gizmos.color = new Color(0, 1, 0, 0.5f);
-    // Gizmos.DrawCube(new Vector2(transform.position.x, transform.position.y - 0.13f),
-    //  new Vector2(0.1f, 0.01f));
-    //}
 
-}
+// Drawing an overlap area for an Object //
+///////////////////////////////////////////
+//void OnDrawGizmos ()
+//{
+//   Gizmos.color = new Color(0, 1, 0, 0.5f);
+// Gizmos.DrawCube(new Vector2(transform.position.x, transform.position.y - 0.13f),
+//  new Vector2(0.1f, 0.01f));
+//}
