@@ -44,6 +44,24 @@ public class Ball : MonoBehaviour
     {
         rig_body = GetComponent<Rigidbody2D>();
         sprite_rend = GetComponent<SpriteRenderer>();
+
+        #region Reinitializing
+        // Reinitializing variables
+        health = 5;
+        baseSpeed = 2.0f;
+
+        isWood = true;
+        isMetal = false;
+
+        inFire = false;
+        inMud = false;
+        inWater = false;
+        onTrampoline = false;
+
+        hasKey = false;
+
+        #endregion
+
     }
 
     void Update()
@@ -153,7 +171,11 @@ public class Ball : MonoBehaviour
             water_density = other.GetComponent<BuoyancyEffector2D>();
             water_density.density = 10;
 
-            FindObjectOfType<AudioManager>().Play("Water");
+            FindObjectOfType<AudioManager>().Play("Splash");
+        }
+        else if (other.gameObject.tag == "Water" && isWood)
+        {
+            FindObjectOfType<AudioManager>().Play("Splash");
         }
     }
 } // class

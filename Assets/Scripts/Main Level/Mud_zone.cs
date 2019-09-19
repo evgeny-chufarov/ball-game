@@ -7,7 +7,10 @@ public class Mud_zone : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Ball.inMud = true;
+        if (Ball.isWood)
+        {
+           Ball.inMud = true;
+        }
     }
 
 }
