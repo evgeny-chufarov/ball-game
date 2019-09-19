@@ -7,7 +7,7 @@ public class Water_zone : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        Ball.mad = false;
+        Ball.inMud = false;
         Ball.inWater = true;
     }
     void OnTriggerExit2D(Collider2D other)
