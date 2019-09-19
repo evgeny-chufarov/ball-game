@@ -12,6 +12,7 @@ TagManager:
   - Obstacle
   - Water
   - Water2
+  - NotDown
   layers:
   - Default
   - TransparentFX

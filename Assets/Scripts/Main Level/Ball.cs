@@ -7,6 +7,8 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] Transform spawnPoint;
     [SerializeField] Transform portalPoint;
+    [SerializeField] Transform downPoint;
+
 
     public Joystick joystick;
 
@@ -16,7 +18,7 @@ public class Ball : MonoBehaviour
     private BuoyancyEffector2D water_density;
 
     // Variables for speed control
-    public static float baseSpeed = 1.5f;
+    public static float baseSpeed = 2.0f;
     public float speed;
     
     // Variables for jumping
@@ -117,6 +119,12 @@ public class Ball : MonoBehaviour
         {
             rig_body.transform.position = portalPoint.position;
             FindObjectOfType<AudioManager>().Play("Teleport");
+        }
+
+        // Don't let the ball down
+        if (other.gameObject.tag == "NotDown")
+        {
+            rig_body.transform.position = downPoint.position;
         }
 
         // Getting the key
